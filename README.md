@@ -66,10 +66,12 @@ The company specified the following requirements:
 
 # Implementation
 
+
 ## Step 1: Create VLANs
 
 Created VLANs for the IT, Accounts, and Sales departments.
 
+```terminal
 enable
 configure terminal
 
@@ -81,13 +83,14 @@ vlan 20
 
 vlan 30
  name Sales
-
+```
 ---
+
 
 ## Step 2: Assign Access Ports
 
 Assign switch ports to their departmental VLANs.
-
+```terminal
 configure terminal
 
 interface range fa0/2-4
@@ -101,6 +104,7 @@ interface range fa0/5-7
 interface range fa0/8-10
  switchport mode access
  switchport access vlan 30
+```
 
 ### Port Allocation
 
@@ -112,17 +116,19 @@ interface range fa0/8-10
 
 ---
 
+
 ## Step 3: Configure the Trunk Link
 
 Configured the uplink between the switch and router as an IEEE 802.1Q trunk.
-
+```terminal
 configure terminal
 
 interface fa0/1
  switchport mode trunk
  switchport trunk native vlan 199
-
+```
 ---
+
 
 ## Step 4: Verify Switch Configuration
 
@@ -130,40 +136,43 @@ Verify VLAN creation and trunk operation.
 
 ```verification command
 show vlan brief
+```
 <img width="804" height="328" alt="image" src="https://github.com/user-attachments/assets/9e24da36-4412-45bc-8d40-fe605cf44560" />
 
-```
 
 ```verification command
 show interfaces trunk
+```
 <img width="698" height="235" alt="image" src="https://github.com/user-attachments/assets/023776b8-e1c5-426a-9bfa-2827ddc1f89a" />
 
-```
 
-```Expected results:
+Expected results:
 
 * VLANs 10, 20, and 30 are present.
 * Access ports are assigned correctly.
 * Fa0/1 is operating as a trunk.
-```
+  
 ---
 
 # Router-on-a-Stick Configuration
 
+
 ## Step 5: Enable Router Interface
 
-
+```terminal
 configure terminal
 
 interface g0/0
  no shutdown
+```
 
 ---
+
 
 ## Step 6: Configure Subinterfaces
 
 Configured router subinterfaces to provide inter-VLAN routing.
-
+```terminal
 configure terminal
 
 interface g0/0.10
@@ -177,6 +186,7 @@ interface g0/0.20
 interface g0/0.30
  encapsulation dot1Q 30
  ip address 192.168.4.129 255.255.255.192
+```
 
 ### Gateway Assignment
 
@@ -188,63 +198,69 @@ interface g0/0.30
 
 ---
 
+
 ## Step 7: Verify Router Configuration
 
 ```verification command
 show ip interface brief
+```
 <img width="817" height="173" alt="image" src="https://github.com/user-attachments/assets/1d85ef81-ed2c-4b6e-89af-15367358ef77" />
 
-```
 
-```Expected results:
+Expected results:
 
 * G0/0 is Up/Up
 * G0/0.10 is Up/Up
 * G0/0.20 is Up/Up
 * G0/0.30 is Up/Up
-```
 
 ---
 
 # DHCP Configuration
 
+
 ## Step 8: Exclude Reserved Addresses
 
 Reserved the first available addresses in each subnet for special devices such as printers, servers, and access points.
-
+```terminal
 ip dhcp excluded-address 192.168.4.1 192.168.4.10
 
 ip dhcp excluded-address 192.168.4.65 192.168.4.75
 
 ip dhcp excluded-address 192.168.4.129 192.168.4.139
-
+```
 
 ---
+
 
 ## Step 9: Create DHCP Pools
 
 ### IT Department
-
+```terminal
 ip dhcp pool IT
 network 192.168.4.0 255.255.255.192
  default-router 192.168.4.1
  dns-server 192.168.4.1
+```
 
 ### Accounts Department
-
+```terminal
 ip dhcp pool Accounts
 network 192.168.4.64 255.255.255.192
  default-router 192.168.4.65
  dns-server 192.168.4.65
+```
 
 ### Sales Department
-
+```terminal
 ip dhcp pool Sales
 network 192.168.4.128 255.255.255.192
  default-router 192.168.4.129
  dns-server 192.168.4.129
+```
 
 ---
+
 
 ## Step 10: Configure End Devices for DHCP
 
@@ -255,7 +271,6 @@ On each PC select:
 <img width="1920" height="982" alt="image" src="https://github.com/user-attachments/assets/263d4e80-b024-404f-a4c5-ae4779cca8d6" />
 <img width="1920" height="982" alt="image" src="https://github.com/user-attachments/assets/45d40d69-a0f5-4c7e-a15f-a0de021be616" />
 
-```
 Verify that each device automatically receives:
 
 * IP Address
@@ -264,10 +279,10 @@ Verify that each device automatically receives:
 * DNS Server
 <img width="1921" height="1021" alt="image" src="https://github.com/user-attachments/assets/6ee5da0b-ce07-4201-8e43-f40393f274ad" />
 
-```
 ---
 
 # Wireless Network Configuration
+
 
 ## Step 11: Configure Wireless Access Points
 
@@ -282,6 +297,7 @@ Configure:
 3. Strong Passphrase(aka Wifi password)
 4. AES Encryption
 <img width="1921" height="1021" alt="image" src="https://github.com/user-attachments/assets/b28c8f6d-3eb8-4e00-afa2-a0037599b7a5" />
+
 
 ## Step 12: Connect Wireless Clients
 
@@ -383,7 +399,7 @@ Potential enhancements include:
 
 **Nyasha Prince Jiri**
 
-Network Engineer | IT Support Technician
+IT Support Technician | Network Engineer 
 
 *Helping People One Ping At A Time* 🚀
 
