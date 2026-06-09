@@ -1,5 +1,5 @@
 # Simple LAN Design Using Cisco Packet Tracer | Network Lab #1
-## Watch me build this lab on YouTube => 
+## Watch me build this lab on YouTube => https://youtu.be/3_eF6ohP7YM
 
 ## Network Lab #1 – VLANs, DHCP & Wireless Networking
 
@@ -405,4 +405,4 @@ IT Support Technician | Network Engineer
 
 ---
 
-## Watch me build this lab on YouTube => 
+## Watch me build this lab on YouTube => https://youtu.be/3_eF6ohP7YM
